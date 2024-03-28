@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Orange
   Mesh: {fileID: -7511558181221131132, guid: f0064adfc7f2b204cbeef70b18ed99f2, type: 3}
-  Cost: 5
+  Cost: 4
   Gain: 8
   TimeBetweenGrowthStep: 0
   NumberOfGrowthStep: 50
