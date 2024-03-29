@@ -4,17 +4,15 @@ public class PlayerHarvest : MonoBehaviour
 {
     private PlayerInventoryMain _inventory;
 
-    private void Awake()
-    {
-        _inventory = GetComponent<PlayerInventoryMain>();
-    }
-
+    /// <summary>
+    /// This method empties the targeted parcel and stocks the harvested fruit in the player's "hold slot". Also reset the targeted parcel.
+    /// </summary>
     public void Harvest(GameObject parcelle)
     {
-        if (_inventory.CurrentFruitHold == null)
+        if (this._inventory.CurrentFruitHold == null)
         {
             parcelle.GetComponent<Parcelle>().State = 0;
-            _inventory.ChangeHoldFruit(parcelle.GetComponent<Parcelle>().ContainedPlant);
+            this._inventory.ChangeHoldFruit(parcelle.GetComponent<Parcelle>().ContainedPlant);
             parcelle.GetComponent<MeshRenderer>().material = parcelle.GetComponent<Parcelle>().DryDirtMat;
             parcelle.GetComponent<Parcelle>().ContainedPlant.SetActive(false);
             parcelle.GetComponent<Parcelle>().ContainedPlant = null;
@@ -24,5 +22,9 @@ public class PlayerHarvest : MonoBehaviour
             Debug.Log("Fruit déjà en main");
         }
     }
-    
+
+    private void Awake()
+    {
+        this._inventory = this.GetComponent<PlayerInventoryMain>();
+    }
 }

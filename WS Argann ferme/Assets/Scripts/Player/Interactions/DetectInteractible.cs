@@ -8,8 +8,7 @@ public class DetectInteractible : MonoBehaviour
     {
         if (other.gameObject.tag != "Wall" && (other.gameObject.tag == "Parcelle" || other.gameObject.tag == "Shop" || other.gameObject.tag == "JuiceMachine"))
         {
-            InteractionTarget = other.gameObject;
-            
+            this.InteractionTarget = other.gameObject;
         }
     }
 
@@ -17,7 +16,7 @@ public class DetectInteractible : MonoBehaviour
     {
         if (other.gameObject.tag != "Wall" && (other.gameObject.tag == "Parcelle" || other.gameObject.tag == "Shop" || other.gameObject.tag == "JuiceMachine"))
         {
-            InteractionTarget = null;
+            this.InteractionTarget = null;
         }
-    } 
+    }
 }

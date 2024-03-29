@@ -3,34 +3,31 @@ using UnityEngine;
 
 public class PlantBehaviour : MonoBehaviour
 {
-    [field: SerializeField] public SeedData _plantData {  get; private set; }
-    [field: SerializeField] public GameObject Parcelle {  get; set; }
-    public bool isGrowing {  get; private set; }
-    public bool _canBeHarvested { get; private set; }
+    [field: SerializeField]
+    public SeedData PlantData { get; private set; }
 
-   public void StartGrowing()
+    [field: SerializeField]
+    public GameObject Parcelle { get; set; }
+
+    public bool IsGrowing { get; private set; }
+
+    /// <summary>
+    /// This coroutine makes the plant grow progressively by increasing its scale over the time. Increases its parcel state in the end.
+    /// </summary>
+    public IEnumerator Grow()
     {
-        
-        StartCoroutine(Grow());
-    }
+        if (!this.IsGrowing)
+        {
+            this.IsGrowing = true;
+            for (int stepCounter = 0; stepCounter < this.PlantData.NumberOfGrowthStep; stepCounter++)
+            {
+                yield return new WaitForSeconds(this.PlantData.TimeBetweenGrowthStep);
+                this.gameObject.transform.localScale += new Vector3(this.PlantData.GrowthScaleStep, this.PlantData.GrowthScaleStep, this.PlantData.GrowthScaleStep);
+            }
 
-   private IEnumerator Grow()
-   {
-        Debug.Log("call");
-        if (!isGrowing)
-        {
-            isGrowing = true;
-        Debug.Log("Started growing");
-        for (int stepCounter = 0; stepCounter < _plantData.NumberOfGrowthStep; stepCounter++)
-        {
-                yield return new WaitForSeconds(_plantData.TimeBetweenGrowthStep);
-                this.gameObject.transform.localScale += new Vector3(_plantData.GrowthScaleStep, _plantData.GrowthScaleStep, _plantData.GrowthScaleStep);
-           
+            this.Parcelle.GetComponent<Parcelle>().State++;
         }
-            Parcelle.GetComponent<Parcelle>().State++;
-            Debug.Log("finished growing");
-        }
-        
+
         yield return null;
-   }
+    }
 }
