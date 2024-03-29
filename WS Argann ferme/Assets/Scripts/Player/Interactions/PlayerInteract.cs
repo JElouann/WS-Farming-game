@@ -58,9 +58,6 @@ public class PlayerInteract : MonoBehaviour
                 this.gameObject.GetComponent<PlayerWater>().Water(parcelle);
                 break;
 
-            case 2:
-                Debug.Log("growing");
-                break;
             case 3:
                 this.gameObject.GetComponent<PlayerHarvest>().Harvest(parcelle);
                 break;
